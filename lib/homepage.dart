@@ -1,78 +1,121 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
   const HomePage({super.key});
 
   @override
+  State<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  String p = "", t = "", r = "", result = "";
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.blue.shade100,
       appBar: AppBar(
         shadowColor: Colors.blue,
-        backgroundColor: Colors.cyan,
+        backgroundColor: Colors.green.shade500,
         foregroundColor: Colors.white,
-        title: const Center(child: Text("Home Page")),
+        title: const Center(child: Text("Simple Interest Calculator")),
       ),
-      drawer: Drawer(
+      body: Container(
+        padding: const EdgeInsets.all(15),
         child: ListView(
           children: [
-            const UserAccountsDrawerHeader(
-              accountName: Text("Sulav Karki"),
-              accountEmail: Text("iamSulav@gmail.com"),
+            const SizedBox(
+              height: 15,
             ),
-            ListTile(
-              title: Text(
-                "Purchase",
-                style: GoogleFonts.lato(
-                  textStyle:
-                      const TextStyle(color: Colors.blue, letterSpacing: .5),
+            TextField(
+              onChanged: (val) {
+                p = val;
+              },
+              keyboardType: TextInputType.number,
+              decoration: InputDecoration(
+                hintText: "Enter Principal",
+                enabledBorder: OutlineInputBorder(
+                  borderSide: const BorderSide(color: Colors.black),
+                  borderRadius: BorderRadius.circular(8),
+                ),
+                focusedBorder: OutlineInputBorder(
+                  borderSide: const BorderSide(color: Colors.green),
+                  borderRadius: BorderRadius.circular(8),
                 ),
               ),
-              subtitle: const Text("Purchase Item"),
-              leading: const Icon(Icons.shop),
-              onTap: () {
-                if (kDebugMode) {
-                  print("Purchase pressed");
-                }
-              },
             ),
-            ListTile(
-              title: Text(
-                "Sales",
-                style: GoogleFonts.lato(
-                  textStyle:
-                      const TextStyle(color: Colors.red, letterSpacing: .5),
+            const SizedBox(
+              height: 8,
+            ),
+            TextField(
+              onChanged: (val) {
+                t = val;
+              },
+              keyboardType: TextInputType.number,
+              decoration: InputDecoration(
+                hintText: "Enter Time",
+                enabledBorder: OutlineInputBorder(
+                  borderSide: const BorderSide(color: Colors.black),
+                  borderRadius: BorderRadius.circular(8),
+                ),
+                focusedBorder: OutlineInputBorder(
+                  borderSide: const BorderSide(color: Colors.cyan),
+                  borderRadius: BorderRadius.circular(8),
                 ),
               ),
-              subtitle: const Text("Sales Item"),
-              leading: const Icon(Icons.accessible_forward_outlined),
-              onTap: () {
-                if (kDebugMode) {
-                  print("Sales pressed");
-                }
-              },
             ),
-            ListTile(
-              title: const Text("Report"),
-              subtitle: const Text("Purchase Item"),
-              leading: const Icon(Icons.report_rounded),
-              onTap: () {
-                if (kDebugMode) {
-                  print("Purchase pressed");
-                }
-              },
+            const SizedBox(
+              height: 8,
             ),
-            ListTile(
-              title: const Text("Users"),
-              subtitle: const Text("About users"),
-              leading: const Icon(Icons.supervised_user_circle_rounded),
-              onTap: () {
-                if (kDebugMode) {
-                  print("User pressed");
-                }
+            TextField(
+              onChanged: (val) {
+                r = val;
               },
+              keyboardType: TextInputType.number,
+              decoration: InputDecoration(
+                hintText: "Enter Rate",
+                enabledBorder: OutlineInputBorder(
+                  borderSide: const BorderSide(color: Colors.black),
+                  borderRadius: BorderRadius.circular(8),
+                ),
+                focusedBorder: OutlineInputBorder(
+                  borderSide: const BorderSide(color: Colors.pink),
+                  borderRadius: BorderRadius.circular(8),
+                ),
+              ),
             ),
+            const SizedBox(
+              height: 15,
+            ),
+            MaterialButton(
+              onPressed: () {
+                setState(() {
+                  result = (double.parse(p) *
+                          double.parse(t) *
+                          double.parse(r) /
+                          100)
+                      .toString();
+                });
+              },
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(8),
+                  side: const BorderSide(color: Colors.red)),
+              height: 50,
+              color: Colors.red,
+              splashColor: Colors.black,
+              child: const Text(
+                "Calculate",
+                style: TextStyle(color: Colors.white, fontSize: 25),
+              ),
+            ),
+            const SizedBox(
+              height: 8,
+            ),
+            Center(
+              child: Text(
+                "तपाईको ब्याज रू. $result",
+                style: const TextStyle(fontSize: 22),
+              ),
+            )
           ],
         ),
       ),

@@ -23,7 +23,7 @@ class _MySplashScreenState extends State<MySplashScreen> {
       ),
       childWidget: SizedBox(
         height: 50,
-        child: Image.asset("images/iconn.png"),
+        child: Image.asset("images/icon.png"),
       ),
       duration: const Duration(milliseconds: 4500),
       animationDuration: const Duration(milliseconds: 3000),
